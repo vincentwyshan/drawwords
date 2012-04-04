@@ -26,13 +26,10 @@ def _enumwords(chars, word='', words=[]):
     "enumerate all posible words"
     length = len(chars)
     if len(word) == 2 and word not in _2start:
-        print word
         return 
     elif len(word) == 3 and word not in _3start:
-        print word
         return
     elif len(word) == 4 and word not in _4start:
-        print word
         return
     for i in range(length):
         c = chars[i]
