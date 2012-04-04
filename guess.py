@@ -9,28 +9,21 @@ dicts = dicts.split('\n')
 dicts = [(v.split('[')[0], None) for v in dicts if v.find('[')>0]
 dicts = dict(dicts)
 
-_2start = dict()
-_3start = dict()
-_4start = dict()
+_start = dict()
 for w in dicts.keys():
-    l = len(w)
-    if l >= 2:
-        _2start[w[:2]] = None
-    if l >= 3:
-        _3start[w[:3]] = None
-    if l >= 4:
-        _4start[w[:3]] = None
-print len(_2start), len(_3start), len(_4start)
+    for i in range(len(w)):
+        key = i+1
+        if not key in _start:
+            _start[key] = dict()
+        _start[key][w[:key]] = None
 
 def _enumwords(chars, word='', words=[]):
     "enumerate all posible words"
     length = len(chars)
-    if len(word) == 2 and word not in _2start:
-        return 
-    elif len(word) == 3 and word not in _3start:
-        return
-    elif len(word) == 4 and word not in _4start:
-        return
+    if word:
+        if len(word) not in _start or word not in _start[len(word)]:
+            print word
+            return
     for i in range(length):
         c = chars[i]
         w = word+c
